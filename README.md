@@ -1,83 +1,183 @@
-# Karthickraja K — Portfolio
+# Karthickraja K — Personal Portfolio
 
-Full-stack portfolio: React (Vite) frontend + Express/MongoDB backend with a working contact form
-that stores every message in MongoDB and emails it to the owner's inbox.
+A personal portfolio website built with React and Vite to showcase my technical skills, projects, professional experience and background.
 
+The website includes a responsive layout, interactive components, light and dark themes, and a contact form powered by Netlify Forms.
+
+## Overview
+
+This portfolio serves as a place to share my work, highlight the technologies I use, and provide information about my experience as a developer.
+
+The application is built as a frontend-only project. It does not require a separate backend server or database.
+
+## Tech Stack
+
+**Frontend**
+- React 19
+- JavaScript (ES6+)
+- HTML5
+- CSS3
+- Vite
+
+**Deployment and Services**
+- Netlify
+- Netlify Forms
+- GitHub
+
+## Features
+
+- Responsive design for desktop, tablet and mobile devices.
+- Interactive navigation with smooth scrolling.
+- Light and dark theme support.
+- Animated hero section.
+- About section highlighting my background and education.
+- Technical skills and experience sections.
+- Project showcase with relevant links.
+- Resume download.
+- Contact form with client-side validation.
+- Contact form submissions handled through Netlify Forms.
+
+## Project Structure
+
+```text
+Karthickraja-Portfolio/
+│
+├── Frontend/
+│   ├── public/
+│   │   ├── assets/
+│   │   └── resume/
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   ├── css/
+│   │   ├── services/
+│   │   │   └── contact.service.js
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   ├── index.html
+│   ├── package.json
+│   ├── vite.config.js
+│   └── netlify.toml
+│
+├── netlify.toml
+└── README.md
 ```
-KARTHIPORTFOLIO/
-├── Frontend/   # React 19 + Vite  (UI)
-└── Backend/    # Express + Mongoose + Nodemailer  (API)   -> see Backend/README.md
-```
 
-## Contact form data flow
+## Getting Started
 
-```
- React Contact.jsx
-        │  1. data from frontend  (POST /api/contact  { name, email, message })
-        ▼
- services/contact.service.js  ->  httpClient.js  ->  Vite proxy  ->  Express
-        │
-        │  validateContactMiddleware  (sanitise + validate, 422 on bad input)
-        ▼
- src/controllers/contactController.js
-        ├── 2. db logic  : src/services/contactService.js  -> MongoDB "contacts"
-        └──    mail      : src/services/mailService.js     -> your inbox + auto-reply
-        │
-        ▼  3. data back to frontend
- { success, message, data, errors }  ->  success / error alert in the form
-```
+Follow these steps to run the project locally.
 
-## Run it locally
+### Prerequisites
 
-**1. Backend**
+Make sure you have the following installed:
+
+- Node.js
+- npm
+- Git
+
+### Installation
+
+Clone the repository:
 
 ```bash
-cd Backend
+git clone https://github.com/KARTHICK2320/Karthickraja-Portfolio.git
+```
+
+Navigate to the frontend directory:
+
+```bash
+cd Karthickraja-Portfolio/Frontend
+```
+
+Install the dependencies:
+
+```bash
 npm install
-cp .env.example .env    # fill MONGO_URI, SMTP_USER, SMTP_PASS, MAIL_TO, ADMIN_API_KEY
-npm run dev             # http://localhost:5000
 ```
 
-**2. Frontend** (new terminal)
+Start the development server:
 
 ```bash
-cd Frontend
-npm install
-npm run dev             # http://localhost:5173
+npm run dev
 ```
 
-The Vite dev server proxies `/api/*` to `http://localhost:5000`, so there is nothing else to configure
-while developing. For production set `VITE_API_BASE_URL` in `Frontend/.env` to your deployed API URL.
+The application will be available at:
 
-## Mock data / offline mode
+```text
+http://localhost:5173
+```
 
-**Backend** — seed MongoDB with 10 realistic messages:
+## Production Build
+
+To generate an optimized production build, run:
 
 ```bash
-cd Backend && npm run seed          # --fresh to wipe first, --clear to remove them
+npm run build
 ```
 
-**Frontend** — run the form with no backend at all (`Frontend/.env`):
+Vite generates the production-ready files inside the `Frontend/dist` directory.
 
-```
-VITE_USE_MOCK_API=true
-```
+To preview the production build locally:
 
-The mock replies with the same `{ success, message, data, errors }` envelope and
-repeats the server's validation rules, so loading, success, field-error and
-network-error states can all be demoed offline. Submitting the message `fail`
-triggers the error alert on purpose.
-
-## Frontend structure (new files)
-
-```
-Frontend/src/
-├── config/api.config.js       # API base URL + endpoint paths
-├── services/
-│   ├── httpClient.js          # fetch wrapper: JSON, timeout, uniform result
-│   └── contact.service.js     # submitContactForm(), checkApiHealth()
-├── mocks/contact.mock.js      # offline mock API (VITE_USE_MOCK_API=true)
-└── components/Contact.jsx     # form state, loading, field errors, feedback alert
+```bash
+npm run preview
 ```
 
-Full API documentation: [`Backend/README.md`](Backend/README.md).
+## Contact Form
+
+The contact form uses Netlify Forms to receive messages without requiring a separate backend application.
+
+When a visitor submits the form, the submission is handled by Netlify and made available through the site's Netlify dashboard.
+
+The form includes:
+
+- Name
+- Email
+- Subject
+- Message
+- Client-side input validation
+- Submission feedback
+- A honeypot field for basic spam protection
+
+### Local Development
+
+Netlify Forms processing is available on Netlify's hosting infrastructure. Running the application through the standard Vite development server does not provide the actual Netlify submission service.
+
+The contact form's live submission functionality should therefore be tested on the deployed Netlify website.
+
+## Deployment
+
+The project is configured for deployment on Netlify.
+
+To deploy using GitHub:
+
+1. Push the project to GitHub.
+2. Connect the repository to Netlify.
+3. Configure the following build settings:
+
+| Setting | Value |
+|---|---|
+| Branch | `main` |
+| Base directory | `Frontend` |
+| Build command | `npm run build` |
+| Publish directory | `dist` |
+
+4. Start the deployment.
+5. Once the build completes, open the generated Netlify URL.
+
+The root-level `netlify.toml` contains the deployment configuration for the project.
+
+After connecting GitHub to Netlify, future changes pushed to the main branch can trigger automatic deployments.
+
+## Contact
+
+Feel free to connect with me through my portfolio or professional profiles.
+
+- GitHub: [KARTHICK2320](https://github.com/KARTHICK2320)
+- Portfolio: Add your deployed Netlify URL here.
+- LinkedIn: Add your LinkedIn profile URL here.
+
+---
+
+Thanks for visiting my repository!

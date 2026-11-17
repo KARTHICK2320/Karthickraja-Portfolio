@@ -1,42 +1,66 @@
 /**
- * contact.service.js (frontend)
+ * contact.service.js
  * ------------------------------------------------------------------
- * All contact-form API calls in one module.
- * Components import this - they never call fetch() directly.
+ * Netlify Forms integration service.
+ * Submits URL-encoded form data directly to Netlify's form-handling
+ * endpoint at "/" with "form-name: contact".
  *
- * When VITE_USE_MOCK_API=true the calls are answered by local mock
- * data instead of the backend (see src/mocks/contact.mock.js).
+ * Maintains the exact response contract expected by Contact.jsx:
+ *   { success: boolean, message: string, errors: object|null }
  * ------------------------------------------------------------------
  */
-
-import { http } from "./httpClient";
-import { API_ENDPOINTS } from "../config/api.config";
-import {
-  USE_MOCK_API,
-  mockSubmitContactForm,
-  mockCheckApiHealth,
-} from "../mocks/contact.mock";
 
 /**
- * STEP 1: send the form data from the frontend to the backend.
- * STEP 3: return the backend's answer to the component.
+ * Submit contact form data to Netlify Forms.
  *
- * @param {{name:string,email:string,message:string}} formData
- * @returns {Promise<{success:boolean,message:string,data:any,errors:object|null}>}
+ * @param {{ name: string, email: string, subject: string, message: string }} formData
+ * @returns {Promise<{ success: boolean, message: string, errors: object|null }>}
  */
 export async function submitContactForm(formData) {
-  if (USE_MOCK_API) return mockSubmitContactForm(formData);
+  try {
+    // If subject was prepended to message, extract the clean message body
+    let cleanMessage = formData.message || "";
+    if (
+      formData.subject &&
+      cleanMessage.startsWith(`[Subject: ${formData.subject}]\n\n`)
+    ) {
+      cleanMessage = cleanMessage.slice(`[Subject: ${formData.subject}]\n\n`.length);
+    }
 
-  return http.post(API_ENDPOINTS.contact, {
-    name: formData.name,
-    email: formData.email,
-    message: formData.message,
-  });
-}
+    const payload = {
+      "form-name": "contact",
+      name: (formData.name || "").trim(),
+      email: (formData.email || "").trim(),
+      subject: (formData.subject || "").trim(),
+      message: cleanMessage.trim(),
+    };
 
-/** Simple ping used to check that the API is reachable. */
-export async function checkApiHealth() {
-  if (USE_MOCK_API) return mockCheckApiHealth();
+    const body = new URLSearchParams(payload).toString();
 
-  return http.get(API_ENDPOINTS.health);
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body,
+    });
+
+    if (response.ok) {
+      return {
+        success: true,
+        message: "Thank you! Your message has been sent successfully.",
+        errors: null,
+      };
+    }
+
+    return {
+      success: false,
+      message: "Unable to submit your message right now. Please try again later.",
+      errors: null,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Unable to reach the server. Please check your connection and try again.",
+      errors: null,
+    };
+  }
 }

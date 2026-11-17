@@ -1,55 +1,188 @@
-/* Skills Section Styles */
-.skills-card {
+/* ==========================================================================
+   Skills Section Styles - Modern Dual-Theme Design
+   ========================================================================== */
+
+#service {
+  position: relative;
+  width: 100%;
+}
+
+/* Skills Card Base (Light Mode) */
+.service-card.skills-card {
   display: flex;
   flex-direction: column;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(106, 31, 194, 0.12) !important;
+  border-radius: 18px !important;
+  box-shadow:
+    0 8px 24px rgba(106, 31, 194, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.02) !important;
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card.skills-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--brand, #6a1fc2) !important;
+  box-shadow:
+    0 16px 36px rgba(106, 31, 194, 0.15),
+    0 0 20px rgba(106, 31, 194, 0.08) !important;
 }
 
 .skills-body {
   flex: 1;
+  width: 100%;
 }
 
 .skills-icon {
-  height: 45px;
+  height: 48px;
+  width: 48px;
   object-fit: contain;
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.service-card.skills-card:hover .skills-icon {
+  transform: scale(1.12);
 }
 
 .skills-title {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--ink, #3c3a4b);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
 
-.skills-badge {
-  font-size: 0.7rem;
-  padding: 4px 8px;
-  border-radius: 10px;
+.service-card.skills-card:hover .skills-title {
+  color: var(--brand, #6a1fc2);
+}
+
+/* Category Badge (Light Mode) */
+.skills-badge,
+#service .badge-primary {
+  display: inline-block;
+  background-color: rgba(106, 31, 194, 0.08) !important;
+  color: var(--brand, #6a1fc2) !important;
+  border: 1px solid rgba(106, 31, 194, 0.2) !important;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+}
+
+.service-card.skills-card:hover .skills-badge {
+  background-color: rgba(106, 31, 194, 0.14) !important;
+  border-color: rgba(106, 31, 194, 0.35) !important;
 }
 
 .skills-description {
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--muted, #46444f) !important;
+  transition: color 0.3s ease;
 }
 
-/* Dark Mode Overrides for service-card and badge-primary inside service section */
-.dark-mode .service-card {
-  background-color: #1e1e1e !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  color: #f5f5f5 !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* ==========================================================================
+   Dark Mode Overrides
+   ========================================================================== */
+
+body.dark-mode #service .section-title,
+.dark-mode #service .section-title {
+  color: #f1eefc !important;
 }
 
-.dark-mode .service-card:hover {
-  border-color: rgba(43, 238, 52, 0.45) !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(43, 238, 52, 0.12) !important;
+body.dark-mode .service-card,
+body.dark-mode .skills-card,
+.dark-mode .service-card,
+.dark-mode .skills-card {
+  background-color: rgba(23, 19, 34, 0.9) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(180, 140, 255, 0.16) !important;
+  border-radius: 18px !important;
+  color: #f1eefc !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    border-color 0.35s ease;
 }
 
+body.dark-mode .service-card:hover,
+body.dark-mode .skills-card:hover,
+.dark-mode .service-card:hover,
+.dark-mode .skills-card:hover {
+  transform: translateY(-6px);
+  border-color: #a87ffb !important;
+  box-shadow:
+    0 16px 36px rgba(0, 0, 0, 0.65),
+    0 0 20px rgba(168, 127, 251, 0.22) !important;
+}
+
+body.dark-mode .skills-title,
+body.dark-mode .service-card .title,
+.dark-mode .skills-title,
 .dark-mode .service-card .title {
-  color: #f5f5f5 !important;
+  color: #f1eefc !important;
 }
 
-.dark-mode .badge-primary {
-  background-color: rgba(43, 238, 52, 0.12) !important;
-  color: #2BEE34 !important;
-  border: 1px solid rgba(43, 238, 52, 0.25) !important;
+body.dark-mode .skills-card:hover .skills-title,
+.dark-mode .skills-card:hover .skills-title {
+  color: #cbb3ff !important;
 }
 
+/* Replaced green badges with purple/violet theme tokens */
+body.dark-mode .skills-badge,
+body.dark-mode #service .badge-primary,
+.dark-mode .skills-badge,
+.dark-mode #service .badge-primary {
+  background-color: rgba(180, 140, 255, 0.12) !important;
+  color: #cbb3ff !important;
+  border: 1px solid rgba(180, 140, 255, 0.25) !important;
+}
+
+body.dark-mode .skills-card:hover .skills-badge,
+.dark-mode .skills-card:hover .skills-badge {
+  background-color: rgba(180, 140, 255, 0.2) !important;
+  border-color: rgba(180, 140, 255, 0.38) !important;
+}
+
+body.dark-mode .skills-description,
+body.dark-mode .skills-card p,
+.dark-mode .skills-description,
+.dark-mode .skills-card p {
+  color: #b8b3cb !important;
+}
+
+/* GitHub Icon clarity on dark surfaces */
+body.dark-mode .skills-card img[src*="github.png"],
+.dark-mode .skills-card img[src*="github.png"] {
+  filter: brightness(0) invert(0.95);
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .service-card.skills-card,
+  .skills-icon {
+    transition: none !important;
+  }
+
+  .service-card.skills-card:hover {
+    transform: none !important;
+  }
+
+  .service-card.skills-card:hover .skills-icon {
+    transform: none !important;
+  }
+}

@@ -21,9 +21,13 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
 
   const handleLinkClick = (e, hash) => {
     e.preventDefault();
+    setIsActive(false); // Close mobile menu if open
+    if (hash === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const element = document.querySelector(hash);
     if (element) {
-      setIsActive(false); // Close mobile menu if open
       element.scrollIntoView({ behavior: "smooth" });
     }
   };

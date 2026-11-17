@@ -1,4 +1,8 @@
 /* Global Styles & Transitions */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   transition:
     background-color 0.3s ease,
@@ -7,61 +11,115 @@ body {
 
 /* Global Dark Mode Styles */
 .dark-mode {
-  background-color: #141414 !important;
+  background-color: #0f0d18 !important;
   color: #f5f5f5 !important;
 }
 
+/* Seamless Continuous Section Background Flow */
+.section {
+  transition: background 0.3s ease, background-color 0.3s ease;
+}
+
+#about {
+  background-color: transparent;
+}
+
+#service {
+  background: linear-gradient(180deg, transparent 0%, rgba(106, 31, 194, 0.035) 50%, transparent 100%);
+}
+
+#portfolio {
+  background-color: transparent;
+}
+
+#experience {
+  background: linear-gradient(180deg, transparent 0%, rgba(106, 31, 194, 0.035) 50%, transparent 100%);
+}
+
+#contact {
+  background: linear-gradient(180deg, transparent 0%, rgba(106, 31, 194, 0.02) 100%);
+}
+
+.footer {
+  background-color: transparent;
+}
+
+/* Dark Mode Continuous Section Background Flow */
 .dark-mode .section {
-  background-color: #141414 !important;
+  background-color: transparent !important;
+}
+
+.dark-mode #about {
+  background-color: transparent !important;
+}
+
+.dark-mode #service {
+  background: linear-gradient(180deg, transparent 0%, rgba(168, 127, 251, 0.04) 50%, transparent 100%) !important;
+}
+
+.dark-mode #portfolio {
+  background-color: transparent !important;
+}
+
+.dark-mode #experience {
+  background: linear-gradient(180deg, transparent 0%, rgba(168, 127, 251, 0.04) 50%, transparent 100%) !important;
+}
+
+.dark-mode #contact {
+  background: linear-gradient(180deg, transparent 0%, rgba(168, 127, 251, 0.025) 100%) !important;
+}
+
+.dark-mode .footer {
+  background-color: transparent !important;
 }
 
 .dark-mode .section-title {
-  color: #f5f5f5 !important;
+  color: #f1eefc !important;
 }
 
 .dark-mode .section-subtitle {
-  color: #2BEE34 !important;
+  color: #a87ffb !important;
 }
 
 .dark-mode .text-primary {
-  color: #2BEE34 !important;
+  color: #a87ffb !important;
 }
 
 .dark-mode .text-muted,
 .dark-mode p {
-  color: #a0a0a0 !important;
+  color: #b8b3cb !important;
 }
 
 /* Dark Mode Primary Button */
 .dark-mode .btn-primary {
-  background-color: #2BEE34 !important;
-  border-color: #2BEE34 !important;
-  color: #141414 !important;
+  background-color: #a87ffb !important;
+  border-color: #a87ffb !important;
+  color: #140d25 !important;
   font-weight: 600;
   transition: all 0.3s ease;
 }
 
 .dark-mode .btn-primary:hover,
 .dark-mode .btn-primary:focus {
-  background-color: #25d42e !important;
-  border-color: #25d42e !important;
-  color: #141414 !important;
-  box-shadow: 0 4px 15px rgba(43, 238, 52, 0.35) !important;
+  background-color: #be9eff !important;
+  border-color: #be9eff !important;
+  color: #140d25 !important;
+  box-shadow: 0 4px 15px rgba(168, 127, 251, 0.4) !important;
 }
 
 /* Dark Mode Outline Primary Button */
 .dark-mode .btn-outline-primary {
-  border-color: #2BEE34 !important;
-  color: #2BEE34 !important;
+  border-color: #a87ffb !important;
+  color: #a87ffb !important;
   background-color: transparent !important;
   transition: all 0.3s ease;
 }
 
 .dark-mode .btn-outline-primary:hover,
 .dark-mode .btn-outline-primary:focus {
-  background-color: #2BEE34 !important;
-  border-color: #2BEE34 !important;
-  color: #141414 !important;
-  box-shadow: 0 4px 15px rgba(43, 238, 52, 0.3) !important;
+  background-color: #a87ffb !important;
+  border-color: #a87ffb !important;
+  color: #140d25 !important;
+  box-shadow: 0 4px 15px rgba(168, 127, 251, 0.3) !important;
 }
 

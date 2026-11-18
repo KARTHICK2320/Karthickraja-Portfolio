@@ -96,7 +96,7 @@ export default function Hero({ darkMode }) {
             <a
               className="btn line"
               href={PROFILE.links.resume}
-              download="Karthickraja_K_Resume.pdf"
+              download="Karthickraja_K_Full_Stack_Developer_Resume.pdf"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16" /></svg>
               Download Resume

@@ -29,6 +29,7 @@ export async function submitContactForm(formData) {
 
     const payload = {
       "form-name": "contact",
+      "bot-field": "",
       name: (formData.name || "").trim(),
       email: (formData.email || "").trim(),
       subject: (formData.subject || "").trim(),

@@ -365,7 +365,20 @@ export default function Contact() {
                 Fill out the form below and I&apos;ll get back to you within 24 hours.
               </p>
 
-              <form onSubmit={handleSubmit} className="custom-contact-form" noValidate>
+              <form
+                name="contact"
+                method="POST"
+                action="/"
+                data-netlify="true"
+                netlify-honeypot="bot-field"
+                onSubmit={handleSubmit}
+                className="custom-contact-form"
+                noValidate
+              >
+                {/* Netlify Forms Hidden Identification Fields */}
+                <input type="hidden" name="form-name" value="contact" />
+                <input type="hidden" name="bot-field" />
+
                 {/* Name & Email Row (Side by side on desktop) */}
                 <div className="form-input-row">
                   <div className="form-group-item">
